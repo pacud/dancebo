@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- 2.11 version of jquery on googleapis -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- place holder for page specific js files -->
+    {% block spec_heads_js %}{% endblock %}
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <!-- meta recommended by bootstrap to ensure proper work on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>dancebo - {{ title }}</title>
+  </head>
+  <body>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
