@@ -1,12 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import ConfigParser
 from flask import (
     Flask,
     render_template,
     request,
+    session,
+    redirect,
 )
-import ConfigParser
+from werkzeug.exceptions import Forbidden
 
 
 #init config
@@ -15,12 +18,22 @@ config.read('config.ini')
 app = Flask(config.get('dancebo', 'app_name'))
 app.secret_key = config.get('dancebo', 'secret_key')
 debug = bool(config.get('dancebo', 'debug'))
+password = config.read('debug_pass')
+
+
+@app.route('/home', methods=['Get'])
+def home():
+    return render_template('home.html', user=session['name'])
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        return str(request.form)
+        print request.form
+        # if not password == request.form['password']:
+        #     raise Forbidden('You don\'t have access to this ressource')
+        session['name'] = request.form['login']
+        return redirect('/home')
     return render_template('login.html')
 
 if __name__ == '__main__':
