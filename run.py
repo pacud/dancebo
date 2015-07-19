@@ -21,9 +21,24 @@ debug = bool(config.get('dancebo', 'debug'))
 password = config.read('debug_pass')
 
 
-@app.route('/home', methods=['Get'])
+@app.route('/home', methods=['GET'])
 def home():
     return render_template('home.html', user=session['name'])
+
+
+@app.route('/inscription', methods=['GET'])
+def inscription():
+    return render_template('inscription.html', user=session['name'])
+
+
+@app.route('/cartes', methods=['GET'])
+def cartes():
+    return render_template('cartes.html', user=session['name'])
+
+
+@app.route('/trombi', methods=['GET'])
+def trombi():
+    return render_template('trombi.html', user=session['name'])
 
 
 @app.route('/login', methods=['GET', 'POST'])
