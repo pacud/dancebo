@@ -23,22 +23,59 @@ password = config.read('debug_pass')
 
 @app.route('/home', methods=['GET'])
 def home():
-    return render_template('home.html', user=session['name'])
+    return render_template('home.html')
 
 
 @app.route('/inscription', methods=['GET'])
 def inscription():
-    return render_template('inscription.html', user=session['name'])
+    return render_template('inscription.html')
 
 
 @app.route('/cartes', methods=['GET'])
 def cartes():
-    return render_template('cartes.html', user=session['name'])
+    return render_template('cartes.html')
 
 
 @app.route('/trombi', methods=['GET'])
 def trombi():
-    return render_template('trombi.html', user=session['name'])
+    user_list = [
+        {
+            'fistname': u'Coco',
+            'lastname': u'Nut',
+            'mobile': u'0612345789',
+            'valid': 1,
+            'lessons_left': 5,
+            'profile_pic': 'file:///home/patrick/Downloads/pics/64184.jpg'
+        },
+        {
+            'fistname': u'Pea',
+            'lastname': u'Nut',
+            'mobile': u'0123456789',
+            'valid': 1,
+            'lessons_left': 2,
+            'profile_pic': 'file:///home/patrick/Downloads/pics/64184.jpg'
+        },
+        {
+            'fistname': u'Wall',
+            'lastname': u'Nut',
+            'mobile': u'0033412356789',
+            'valid': 1,
+            'lessons_left': 1,
+            'profile_pic': 'file:///home/patrick/Downloads/pics/64184.jpg'
+        },
+        {
+            'fistname': u'Hairy',
+            'lastname': u'Nut',
+            'mobile': u'0712345689',
+            'valid': 0,
+            'lessons_left': 0,
+            'profile_pic': 'file:///home/patrick/Downloads/pics/64184.jpg'
+        },
+    ]
+    return render_template(
+        'trombi.html',
+        user_list=user_list
+    )
 
 
 @app.route('/login', methods=['GET', 'POST'])
