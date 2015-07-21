@@ -38,38 +38,39 @@ def cartes():
 
 @app.route('/trombi', methods=['GET'])
 def trombi():
+    tmp_profile_pic = 'file:///devel/dancebo/images/64184.jpg'
     user_list = [
         {
-            'fistname': u'Coco',
+            'firstname': u'Coco',
             'lastname': u'Nut',
             'mobile': u'0612345789',
             'valid': 1,
             'lessons_left': 5,
-            'profile_pic': 'file:///home/patrick/Downloads/pics/64184.jpg'
+            'profile_pic': tmp_profile_pic,
         },
         {
-            'fistname': u'Pea',
+            'firstname': u'Pea',
             'lastname': u'Nut',
             'mobile': u'0123456789',
             'valid': 1,
             'lessons_left': 2,
-            'profile_pic': 'file:///home/patrick/Downloads/pics/64184.jpg'
+            'profile_pic': tmp_profile_pic,
         },
         {
-            'fistname': u'Wall',
+            'firstname': u'Wall',
             'lastname': u'Nut',
             'mobile': u'0033412356789',
             'valid': 1,
             'lessons_left': 1,
-            'profile_pic': 'file:///home/patrick/Downloads/pics/64184.jpg'
+            'profile_pic': tmp_profile_pic,
         },
         {
-            'fistname': u'Hairy',
+            'firstname': u'Hairy',
             'lastname': u'Nut',
             'mobile': u'0712345689',
             'valid': 0,
             'lessons_left': 0,
-            'profile_pic': 'file:///home/patrick/Downloads/pics/64184.jpg'
+            'profile_pic': tmp_profile_pic,
         },
     ]
     return render_template(
