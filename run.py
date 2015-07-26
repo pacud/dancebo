@@ -33,7 +33,19 @@ def inscription():
 
 @app.route('/add_student', methods=['POST'])
 def add_student():
-    student = request.form
+    data = request.form
+    student = {
+        'firstname': data.get('firstname'),
+        'lastname': data.get('lastname'),
+        'profile_pic': '',
+        'birth_date': data.get('birthdate'),
+        'email': data.get('email'),
+        'mobile': data.get('mobile'),
+        'card_type': data.get('card_type'),
+        'paiment_method': data.get('paiment_method'),
+        'medical_certificate': data.get('medical_certificate', 0),
+        'inscription_paid': data.get('inscription_paid', 0),
+    }
     return render_template('profile.html', student=student)
 
 
