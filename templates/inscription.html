@@ -1,8 +1,27 @@
 {% extends "logged.html" %}
+
+{% block spec_heads_js %}
+
+<script type="text/javascript">
+    function validate_form(){
+        // TODO: Enrichir conf_text avec les infos du form
+        var conf_text = 'Enregistrer l\'élève ?';
+        var conf = confirm(conf_text);
+        return conf;
+    }
+
+    function display_card_price(){
+        // TODO: afficher le helper avec les prix des cartes
+    }
+
+</script>
+
+{% endblock %}
+
 {% block page %}
 
 <h1>Inscription</h1>
-<form action="/add_student" method="POST">
+<form action="/add_student" method="POST" onsubmit="return validate_form()" id="add_student_form" >
     <h2>Informations personnelles</h2>
     <label for="profile_pic">Photo: </label>
     <input type="file" name="profile_pic" id="profile_pic" /><br />
@@ -17,9 +36,9 @@
     <input type="email" name="email" id="email" /><br />
     <label for="mobile">Numéro de téléphone: </label>
     <input type="text" name="mobile" id="mobile" /><br />
-    <h2>Formule choisie</h2>
+    <h2>Carte choisie</h2>
     <label for="card_type">Type de carte</label>
-    <select name="card_type" id="card_type">
+    <select name="card_type" id="card_type" onclick="display_card_price()">
         <option value="0"></option>
         <option value="1">Cours par 10</option>
         <option value="2">Cours par 20</option>
@@ -34,7 +53,9 @@
         <option value="3">Chèque (plusieurs fois)</option>
     </select><br />
     <label for="medical_certificate">Certificat médical</label>
-    <input type="radio" value="1" /><br />
+    <input name="medical_certificate" id="medical_certificate" type="radio" value="1" /><br />
+    <label for="inscription_paid">A payé les 15€ d'inscription</label>
+    <input name="inscription_paid" id="inscription_paid" type="radio" value="1" default="0" /><br />
     <!-- validation -->
     <input type="submit" value="Valider" />
 </form>
