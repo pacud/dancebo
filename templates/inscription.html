@@ -23,39 +23,105 @@
 <h1>Inscription</h1>
 <form action="/add_student" method="POST" onsubmit="return validate_form()" id="add_student_form" >
     <h2>Informations personnelles</h2>
-    <label for="profile_pic">Photo: </label>
-    <input type="file" name="profile_pic" id="profile_pic" /><br />
-    <label for="firstname">Prénom: </label>
-    <input type="text" name="firstname" id="firstname" /><br />
-    <label for="lastname">Nom: </label>
-    <input type="text" name="lastname" id="lastname" /><br />
-    <label for="birthdate">Date de naissance</label>
-    <input type="date" name="birthdate" id="birthdate" />
+    <div class="row">
+        <div class="col-md-2">
+            <label for="profile_pic">Photo: </label><br /><br />
+        </div>
+        <div class="col-md-3">
+            <input class="form-control" type="file" name="profile_pic" id="profile_pic" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="firstname">Prénom: </label><br />
+        </div>
+        <div class="col-md-3">
+            <input class="form-control" type="text" name="firstname" id="firstname" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="lastname">Nom: </label><br />
+        </div>
+        <div class="col-md-3">
+            <input class="form-control" type="text" name="lastname" id="lastname" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="birthdate">Date de naissance</label><br />
+        </div>
+        <div class="col-md-3">
+            <input class="form-control" type="date" name="birthdate" id="birthdate" />
+        </div>
+    </div>
     <h2>Coordonnées</h2>
-    <label for="email">Adresse email: </label>
-    <input type="email" name="email" id="email" /><br />
-    <label for="mobile">Numéro de téléphone: </label>
-    <input type="text" name="mobile" id="mobile" /><br />
+    <div class="row">
+        <div class="col-md-2">
+            <label for="email">Adresse email: </label>
+        </div>
+        <div class="col-md-3">
+            <input class="form-control" type="email" name="email" id="email" /><br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="mobile">Numéro de téléphone: </label>
+        </div>
+        <div class="col-md-3">
+            <input class="form-control" type="text" name="mobile" id="mobile" /><br />
+        </div>
+    </div>
     <h2>Carte choisie</h2>
-    <label for="card_type">Type de carte</label>
-    <select name="card_type" id="card_type" onclick="display_card_price()">
-        <option value="0"></option>
-        <option value="1">Cours par 10</option>
-        <option value="2">Cours par 20</option>
-        <option value="3">Cours par 30</option>
-        <option value="4">Cours à l'unité</option>
-    </select><br />
-    <label for="paiment_method">Méthode de paiement</label>
-    <select name="paiment_method" id="paiment_method" >
-        <option value="0"></option>
-        <option value="1">Espèces</option>
-        <option value="2">Chèque (total)</option>
-        <option value="3">Chèque (plusieurs fois)</option>
-    </select><br />
-    <label for="medical_certificate">Certificat médical</label>
-    <input name="medical_certificate" id="medical_certificate" type="radio" value="1" /><br />
-    <label for="inscription_paid">A payé les 15€ d'inscription</label>
-    <input name="inscription_paid" id="inscription_paid" type="radio" value="1" default="0" /><br />
+    <div class="row">
+        <div class="col-md-2">
+            <label for="card_type">Type de carte</label>
+        </div>
+        <div class="col-md-3">
+            <select name="card_type" id="card_type" onclick="display_card_price()">
+                <option value="0"></option>
+                <option value="1">Cours par 10</option>
+                <option value="2">Cours par 20</option>
+                <option value="3">Cours par 30</option>
+                <option value="4">Cours à l'unité</option>
+            </select><br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="paiment_method">Méthode de paiement</label>
+        </div>
+        <div class="col-md-3">
+            <select name="paiment_method" id="paiment_method" >
+                <option value="0"></option>
+                <option value="1">Espèces</option>
+                <option value="2">Chèque (total)</option>
+                <option value="3">Chèque (plusieurs fois)</option>
+            </select><br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="medical_certificate">Certificat médical</label>
+        </div>
+        <div class="col-md-3">
+            <div class="radio">
+                <label class="radio-inline"><input name="medical_certificate" id="medical_certificate" type="radio" value="1" />Oui</label>
+                <label class="radio-inline"><input name="medical_certificate" id="medical_certificate" type="radio" value="0" />Non</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="inscription_paid">A payé les 15€ d'inscription</label>
+        </div>
+        <div class="col-md-3">
+            <div class="radio">
+                <label class="radio-inline"><input name="inscription_paid" id="inscription_paid" type="radio" value="1" />Oui</label>
+                <label class="radio-inline"><input name="inscription_paid" id="inscription_paid" type="radio" value="0" />Non</label>
+            </div>
+        </div>
+    </div>
     <!-- validation -->
     <input type="submit" value="Valider" />
 </form>
