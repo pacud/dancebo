@@ -3,36 +3,19 @@
 
 that's my trombi page
 <div class="container">
-    <ul style="float:left">
-        {% for student in user_list %}
-        {% if student.id %2 == 1%}
-        <li>
-            <div>
-                <img src="{{student.profile_pic}}" hint="{{student.firstname}} {{student.lastname}}" style="max-width:340px; max-height:340px;" /><br />
+    {% for student in user_list %}
+        <div class="col-md-5" style="margin:10px;">
+            <div class="col-md-3">
+                <img src="{{student.profile_pic}}" hint="{{student.firstname}} {{student.lastname}}" style="max-width:100px; max-height:100px;" />
+            </div>
+            <div class="col-md-8">
                 <span>{{student.firstname}}&nbsp;{{student.lastname}}</span><br />
                 <span>Téléphone : {{student.mobile}}</span><br />
                 <span style="{% if student.lessons_left < 3 %}color:red;{% endif %}">Cours restants : {{student.lessons_left}}</span><br />
                 <span style="color:{% if student.valid == 0 %}red{% else %}green{% endif %};">Carte {% if student.valid == 0%}in{% endif %}valide</span>
             </div>
-        </li>
-        {% endif %}
-        {% endfor %}
-    </ul>
-    <ul style="float:left">
-        {% for student in user_list %}
-        {% if student.id %2 == 0%}
-        <li>
-            <div>
-                <img src="{{student.profile_pic}}" hint="{{student.firstname}} {{student.lastname}}" style="max-width:340px; max-height:340px;" /><br />
-                <span>{{student.firstname}}&nbsp;{{student.lastname}}</span><br />
-                <span>Téléphone : {{student.mobile}}</span><br />
-                <span style="{% if student.lessons_left < 3 %}color:red;{% endif %}">Cours restants : {{student.lessons_left}}</span><br />
-                <span style="color:{% if student.valid == 0 %}red{% else %}green{% endif %};">Carte {% if student.valid == 0%}in{% endif %}valide</span>
-            </div>
-        </li>
-        {% endif %}
-        {% endfor %}
-    </ul>
+        </div>
+    {% endfor %}
 </div>
 
 

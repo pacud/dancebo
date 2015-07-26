@@ -61,7 +61,7 @@ def cartes():
 
 @app.route('/trombi', methods=['GET'])
 def trombi():
-    tmp_profile_pic = 'file:///devel/dancebo/images/64184.jpg'
+    tmp_profile_pic = 'http://img15.hostingpics.net/pics/811484defaultavatar.png'
     user_list = [
         {
             'id': 1,
