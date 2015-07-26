@@ -9,12 +9,12 @@
             <li><a href="/cartes">Cartes</a></li>
             <li><a href="/trombi">Trombi</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/home">Bienvenue {{session.name}}</a></li>
+        </ul>
     </div>
 </nav>
 
-<div class="container">
-Welcome home {{session.name}}
-</div>
 
 <div class="container">
 {% block page %}{% endblock %}
