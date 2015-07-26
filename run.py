@@ -31,6 +31,12 @@ def inscription():
     return render_template('inscription.html')
 
 
+@app.route('/add_student', methods=['POST'])
+def add_student():
+    student = request.form
+    return render_template('profile.html', student=student)
+
+
 @app.route('/cartes', methods=['GET'])
 def cartes():
     return render_template('cartes.html')

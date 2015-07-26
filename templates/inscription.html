@@ -1,6 +1,42 @@
 {% extends "logged.html" %}
 {% block page %}
 
-that's my inscription page
+<h1>Inscription</h1>
+<form action="/add_student" method="POST">
+    <h2>Informations personnelles</h2>
+    <label for="profile_pic">Photo: </label>
+    <input type="file" name="profile_pic" id="profile_pic" /><br />
+    <label for="firstname">Prénom: </label>
+    <input type="text" name="firstname" id="firstname" /><br />
+    <label for="lastname">Nom: </label>
+    <input type="text" name="lastname" id="lastname" /><br />
+    <label for="birthdate">Date de naissance</label>
+    <input type="date" name="birthdate" id="birthdate" />
+    <h2>Coordonnées</h2>
+    <label for="email">Adresse email: </label>
+    <input type="email" name="email" id="email" /><br />
+    <label for="mobile">Numéro de téléphone: </label>
+    <input type="text" name="mobile" id="mobile" /><br />
+    <h2>Formule choisie</h2>
+    <label for="card_type">Type de carte</label>
+    <select name="card_type" id="card_type">
+        <option value="0"></option>
+        <option value="1">Cours par 10</option>
+        <option value="2">Cours par 20</option>
+        <option value="3">Cours par 30</option>
+        <option value="4">Cours à l'unité</option>
+    </select><br />
+    <label for="paiment_method">Méthode de paiement</label>
+    <select name="paiment_method" id="paiment_method" >
+        <option value="0"></option>
+        <option value="1">Espèces</option>
+        <option value="2">Chèque (total)</option>
+        <option value="3">Chèque (plusieurs fois)</option>
+    </select><br />
+    <label for="medical_certificate">Certificat médical</label>
+    <input type="radio" value="1" /><br />
+    <!-- validation -->
+    <input type="submit" value="Valider" />
+</form>
 
 {% endblock %}
