@@ -41,6 +41,7 @@ def trombi():
     tmp_profile_pic = 'file:///devel/dancebo/images/64184.jpg'
     user_list = [
         {
+            'id': 1,
             'firstname': u'Coco',
             'lastname': u'Nut',
             'mobile': u'0612345789',
@@ -49,6 +50,7 @@ def trombi():
             'profile_pic': tmp_profile_pic,
         },
         {
+            'id': 2,
             'firstname': u'Pea',
             'lastname': u'Nut',
             'mobile': u'0123456789',
@@ -57,6 +59,7 @@ def trombi():
             'profile_pic': tmp_profile_pic,
         },
         {
+            'id': 3,
             'firstname': u'Wall',
             'lastname': u'Nut',
             'mobile': u'0033412356789',
@@ -65,6 +68,7 @@ def trombi():
             'profile_pic': tmp_profile_pic,
         },
         {
+            'id': 4,
             'firstname': u'Hairy',
             'lastname': u'Nut',
             'mobile': u'0712345689',
