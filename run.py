@@ -21,6 +21,11 @@ debug = bool(config.get('dancebo', 'debug'))
 password = config.read('debug_pass')
 
 
+@app.route('/', methods=['GET', 'POST'])
+def root():
+    return redirect('/login')
+
+
 @app.route('/home', methods=['GET'])
 def home():
     return render_template('home.html')
