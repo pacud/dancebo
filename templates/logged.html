@@ -1,13 +1,14 @@
 {% extends "main.html" %}
+
 {% block content %}
 
 <nav class="navbar navbar-static-top navbar-default">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
-            <li><a href="/home">Home</a></li>
-            <li><a href="/inscription">Inscription</a></li>
-            <li><a href="/cartes">Cartes</a></li>
-            <li><a href="/trombi">Trombi</a></li>
+            <li class="{% if current_page == 'home' %}active{% endif %}"><a href="/home">Home</a></li>
+            <li class="{% if current_page == 'inscription' %}active{% endif %}"><a href="/inscription">Inscription</a></li>
+            <li class="{% if current_page == 'cartes' %}active{% endif %}"><a href="/cartes">Cartes</a></li>
+            <li class="{% if current_page == 'trombi' %}active{% endif %}"><a href="/trombi">Trombi</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/home">Bienvenue {{session.name}}</a></li>

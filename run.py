@@ -28,12 +28,12 @@ def root():
 
 @app.route('/home', methods=['GET'])
 def home():
-    return render_template('home.html')
+    return render_template('home.html', current_page="home")
 
 
 @app.route('/inscription', methods=['GET'])
 def inscription():
-    return render_template('inscription.html')
+    return render_template('inscription.html', current_page="inscription")
 
 
 @app.route('/add_student', methods=['POST'])
@@ -56,7 +56,7 @@ def add_student():
 
 @app.route('/cartes', methods=['GET'])
 def cartes():
-    return render_template('cartes.html')
+    return render_template('cartes.html', current_page="cartes")
 
 
 @app.route('/trombi', methods=['GET'])
@@ -106,7 +106,8 @@ def trombi():
     ]
     return render_template(
         'trombi.html',
-        user_list=user_list
+        user_list=user_list,
+        current_page="trombi"
     )
 
 
