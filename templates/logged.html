@@ -13,6 +13,17 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/home">Bienvenue {{session.name}}</a></li>
         </ul>
+        {% if current_page %}
+        {% if current_page in ('trombi, cartes') %}
+        <form class="navbar-form navbar-right" role="search" method="POST" action="/search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Prénom" id="firstname" name="firstname" />
+                <input type="text" class="form-control" placeholder="Nom" id="lastname" name="lastname" />
+            </div>
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        </form>
+        {% endif %}
+        {% endif %}
     </div>
 </nav>
 

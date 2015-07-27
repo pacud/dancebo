@@ -10,9 +10,55 @@ from flask import (
     redirect,
 )
 from werkzeug.exceptions import Forbidden
+from student import Student
 
 
-#init config
+tmp_profile_pic = 'http://img15.hostingpics.net/pics/811484defaultavatar.png'
+USER_LIST = [
+    {
+        'id': 1,
+        'firstname': u'Coco',
+        'lastname': u'Nut',
+        'mobile': u'0612345789',
+        'cart_paid': 1,
+        'lessons_left': 5,
+        'profile_pic': tmp_profile_pic,
+        'medical_certificate': 0,
+    },
+    {
+        'id': 2,
+        'firstname': u'Pea',
+        'lastname': u'Nut',
+        'mobile': u'0123456789',
+        'cart_paid': 1,
+        'lessons_left': 2,
+        'profile_pic': tmp_profile_pic,
+        'medical_certificate': 1,
+    },
+    {
+        'id': 3,
+        'firstname': u'Wall',
+        'lastname': u'Nut',
+        'mobile': u'0033412356789',
+        'cart_paid': 1,
+        'lessons_left': 1,
+        'profile_pic': tmp_profile_pic,
+        'medical_certificate': 1,
+    },
+    {
+        'id': 4,
+        'firstname': u'Hairy',
+        'lastname': u'Nut',
+        'mobile': u'0712345689',
+        'cart_paid': 0,
+        'lessons_left': 0,
+        'profile_pic': tmp_profile_pic,
+        'medical_certificate': 1,
+    },
+]
+
+
+# init config
 config = ConfigParser.SafeConfigParser()
 config.read('config.ini')
 app = Flask(config.get('dancebo', 'app_name'))
@@ -36,10 +82,26 @@ def inscription():
     return render_template('inscription.html', current_page="inscription")
 
 
+@app.route('/search', methods=['POST'])
+def search():
+    search_terms = request.form
+    user_list = USER_LIST
+    matches = []
+    for user in user_list:
+        if search_terms['lastname'] == user['lastname']\
+                and search_terms['firstname'] == user['firstname']:
+            matches.append(user)
+    return render_template(
+        'search_results.html',
+        matches=matches,
+        current_page="cartes"
+    )
+
+
 @app.route('/add_student', methods=['POST'])
 def add_student():
     data = request.form
-    student = {
+    profile = {
         'firstname': data.get('firstname'),
         'lastname': data.get('lastname'),
         'profile_pic': '',
@@ -51,7 +113,8 @@ def add_student():
         'medical_certificate': data.get('medical_certificate', 0),
         'inscription_paid': data.get('inscription_paid', 0),
     }
-    return render_template('profile.html', student=student)
+    student = Student(profile)
+    return student.show_profile()
 
 
 @app.route('/cartes', methods=['GET'])
@@ -61,49 +124,7 @@ def cartes():
 
 @app.route('/trombi', methods=['GET'])
 def trombi():
-    tmp_profile_pic = 'http://img15.hostingpics.net/pics/811484defaultavatar.png'
-    user_list = [
-        {
-            'id': 1,
-            'firstname': u'Coco',
-            'lastname': u'Nut',
-            'mobile': u'0612345789',
-            'cart_paid': 1,
-            'lessons_left': 5,
-            'profile_pic': tmp_profile_pic,
-            'medical_certificate': 0,
-        },
-        {
-            'id': 2,
-            'firstname': u'Pea',
-            'lastname': u'Nut',
-            'mobile': u'0123456789',
-            'cart_paid': 1,
-            'lessons_left': 2,
-            'profile_pic': tmp_profile_pic,
-            'medical_certificate': 1,
-        },
-        {
-            'id': 3,
-            'firstname': u'Wall',
-            'lastname': u'Nut',
-            'mobile': u'0033412356789',
-            'cart_paid': 1,
-            'lessons_left': 1,
-            'profile_pic': tmp_profile_pic,
-            'medical_certificate': 1,
-        },
-        {
-            'id': 4,
-            'firstname': u'Hairy',
-            'lastname': u'Nut',
-            'mobile': u'0712345689',
-            'cart_paid': 0,
-            'lessons_left': 0,
-            'profile_pic': tmp_profile_pic,
-            'medical_certificate': 1,
-        },
-    ]
+    user_list = USER_LIST
     return render_template(
         'trombi.html',
         user_list=user_list,
