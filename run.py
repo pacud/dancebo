@@ -102,6 +102,7 @@ def search():
 def add_student():
     data = request.form
     profile = {
+        'title': data.get('title'),
         'firstname': data.get('firstname'),
         'lastname': data.get('lastname'),
         'profile_pic': '',
@@ -112,6 +113,12 @@ def add_student():
         'paiment_method': data.get('paiment_method'),
         'medical_certificate': data.get('medical_certificate', 0),
         'inscription_paid': data.get('inscription_paid', 0),
+        'amount': data.get('amount', 0),
+        'origin': data.get('origin', '').split(','),
+        'origin_other_social': data.get('origin_other_social'),
+        'origin_hearsay': data.get('origin_hearsay'),
+        'origin_other': data.get('origin_other'),
+        'favorite_chanel': data.get('favorite_chanel', '').split(','),
     }
     student = Student(profile)
     return student.show_profile()
