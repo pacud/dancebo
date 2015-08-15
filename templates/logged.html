@@ -8,13 +8,13 @@
             <li class="{% if current_page == 'home' %}active{% endif %}"><a href="/home">Home</a></li>
             <li class="{% if current_page == 'inscription' %}active{% endif %}"><a href="/inscription">Inscription</a></li>
             <li class="{% if current_page == 'cartes' %}active{% endif %}"><a href="/cartes">Cartes</a></li>
-            <li class="{% if current_page == 'trombi' %}active{% endif %}"><a href="/trombi">Trombi</a></li>
+            <li class="{% if current_page == 'presence' %}active{% endif %}"><a href="/presence">Présences</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/home">Bienvenue {{session.name}}</a></li>
         </ul>
         {% if current_page %}
-        {% if current_page in ('trombi, cartes') %}
+        {% if current_page in ('presence, cartes') %}
         <form class="navbar-form navbar-right" role="search" method="POST" action="/search">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Prénom" id="firstname" name="firstname" />

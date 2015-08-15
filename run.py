@@ -124,18 +124,18 @@ def add_student():
     return student.show_profile()
 
 
+@app.route('/presence', methods=['GET'])
+def presence():
+    return render_template('presence.html', current_page="presence")
+
+
 @app.route('/cartes', methods=['GET'])
 def cartes():
-    return render_template('cartes.html', current_page="cartes")
-
-
-@app.route('/trombi', methods=['GET'])
-def trombi():
     user_list = USER_LIST
     return render_template(
-        'trombi.html',
+        'cartes.html',
         user_list=user_list,
-        current_page="trombi"
+        current_page="cartes"
     )
 
 
