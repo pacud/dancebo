@@ -1,6 +1,37 @@
 {% extends "logged.html" %}
 {% block page %}
 
-{{ student }}
+<div class="row">
+    <div class="col-md-4">
+        <img src="{{student.profile_pic}}" hint="{{student.firstname}} {{student.lastname}}" style="max-width:400px; max-height:400px;" />
+    </div>
+    <div class="col-md-6">
+        <span>{{student.firstname}}&nbsp;{{student.lastname}}</span><br />
+        <span>Téléphone : {{student.mobile}}</span><br />
+        <span><img src="
+            {% if student.lessons_left > 3 %}
+                {{ url_for('static', filename='images/check.png') }}
+            {% elif student.lessons_left <= 3 and student.lessons_left > 0 %}
+                {{ url_for('static', filename='images/minus.png') }}
+            {% else %}
+                {{ url_for('static', filename='images/cross.png') }}
+            {% endif %}
+        " height="15" width="15" style="margin-right: 5px;" />Cours restants : {{student.lessons_left}}</span><br />
+        <span><img src="
+            {% if student.cart_paid == 1 %}
+                {{ url_for('static', filename='images/check.png') }}
+            {% else %}
+                {{ url_for('static', filename='images/cross.png') }}
+            {% endif %}
+        " height="15" width="15" style="margin-right: 5px;" />Carte {% if student.cart_paid == 0%}non {% endif %}payée</span><br />
+        <span><img src="
+            {% if student.medical_certificate == 1 %}
+                {{ url_for('static', filename='images/check.png') }}
+            {% else %}
+                {{ url_for('static', filename='images/cross.png') }}
+            {% endif %}
+        " height="15" width="15" style="margin-right: 5px;" />Certificat médical</span><br />
+    </div>
+</div>
 
 {% endblock %}

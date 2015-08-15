@@ -11,4 +11,6 @@ class Student(object):
             self.profile[k] = v
 
     def show_profile(self):
-        return render_template('profile.html', student=self.profile)
+        return render_template(
+            'profile.html', student=self.profile, current_page='cartes'
+        )

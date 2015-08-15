@@ -139,6 +139,17 @@ def cartes():
     )
 
 
+@app.route('/carte_detail/<int:student_id>', methods=['GET'])
+def carte_detail(student_id):
+    profile = {}
+    for student in USER_LIST:
+        if student['id'] == student_id:
+            profile = student
+            break
+    student = Student(profile)
+    return student.show_profile()
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if session.get('name'):
