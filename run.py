@@ -92,8 +92,8 @@ def search():
                 and search_terms['firstname'] == user['firstname']:
             matches.append(user)
     return render_template(
-        'search_results.html',
-        matches=matches,
+        'cartes.html',
+        user_list=matches,
         current_page="cartes"
     )
 

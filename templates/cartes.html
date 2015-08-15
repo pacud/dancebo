@@ -6,6 +6,10 @@
 
 {% block page %}
 
+{% if not user_list %}
+    <span>Aucun étudiant trouvé.</span>
+{% endif %}
+
 {% for student in user_list %}
     <div class="col-md-5 student" style="margin:10px;">
         <a href="/carte_detail/{{student.id}}" title="{{student.firstname}} {{student.lastname}}">
