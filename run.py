@@ -141,6 +141,8 @@ def cartes():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if session.get('name'):
+        return redirect('/home')
     if request.method == 'POST':
         print request.form
         # if not password == request.form['password']:
