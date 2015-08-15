@@ -1,6 +1,60 @@
 {% extends "logged.html" %}
+
+{% block spec_heads_js %}
+
+    <script type="text/javascript">
+
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth();
+      var y = date.getFullYear();
+
+        $.getScript('http://arshaw.com/js/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js',function(){
+          $('#calendar').fullCalendar({
+            header: {
+              left: 'prev,next today',
+              center: 'title',
+              //right: 'month,agendaWeek,agendaDay'
+              right: 'month'
+            },
+            editable: true,
+            events: [
+              {
+                id: 1,
+                title: 'Click for Google',
+                start: new Date(y, m, 14),
+                end: new Date(y, m, 14),
+                url: 'http://google.com/',
+                allDay: false,
+              },
+              {
+                id: 2,
+                title: 'No Click for Google',
+                start: new Date(y, m, 14),
+                end: new Date(y, m, 15),
+                allDay: true,
+              },
+            ]
+          });
+        })    
+    </script>
+
+{% endblock %}
+
+{% block spec_heads_css %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css') }}" type="text/css" media="screen, print" />
+
+{% endblock %}
+
 {% block page %}
 
-that's my "presences" page
+that's my "presences" page<br />
+
+<div class="container">
+    <div class="col-md-11">
+        <div id="calendar"></div>
+    </div>
+</div>
 
 {% endblock %}
