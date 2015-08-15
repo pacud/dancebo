@@ -16,6 +16,8 @@
                     right: 'today'
                 },
                 lang: 'fr',
+                eventColor: '#cccccc',
+                eventTextColor: '#333333',
                 events: [
                     {
                         id: 1,
@@ -33,13 +35,12 @@
 {% block spec_heads_css %}
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.css" type="text/css" media="screen, print" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css') }}" type="text/css" media="screen, print" />
 
 {% endblock %}
 
 {% block page %}
 
-that's my "presences" page<br />
+
 
 <div class="container">
     <div class="col-md-11">
