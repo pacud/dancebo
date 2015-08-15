@@ -33,8 +33,32 @@
         return conf;
     };
 
-    function display_card_price(){
-        // TODO: afficher le helper avec les prix des cartes
+    function display_card_price(value){
+        if (value == 0) {
+            $('#card_price').hide();
+            return true;
+        }
+        console.log('value', value, typeof(value));
+        switch (parseInt(value)){
+            case 1:
+                var amount = '130';
+                break;
+            case 2:
+                var amount = '220';
+                break;
+            case 3:
+                var amount = '330';
+                break;
+            case 4:
+                var amount = '15';
+                break;
+            default:
+                var amount = '0';
+                break;
+        }
+        var card_hint = 'La carte coûte ' + amount + ' €.'
+        $('#card_price').text(card_hint);
+        $('#card_price').show();
     };
 
 </script>
@@ -113,7 +137,7 @@
                 <label for="card_type">Type de carte</label>
             </div>
             <div class="col-md-6">
-                <select name="card_type" id="card_type" onclick="display_card_price()">
+                <select name="card_type" id="card_type" onchange="display_card_price(this.value)">
                     <option value="0"></option>
                     <option value="1">Cours par 10</option>
                     <option value="2">Cours par 20</option>
@@ -121,6 +145,7 @@
                     <option value="4">Cours à l'unité</option>
                     <option value="5">Cours d'essai</option>
                 </select><br />
+                <span id="card_price"></span>
             </div>
         </div>
         <div class="row">
