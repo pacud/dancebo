@@ -162,5 +162,22 @@ def login():
         return redirect('/home')
     return render_template('login.html')
 
+
+@app.route('/add_lesson', methods=['GET', 'POST'])
+def add_lesson():
+    return render_template(
+        'add_lesson.html',
+        current_page='presence'
+    )
+
+
+@app.route('/add_presence/<int:lesson_id>')
+def add_presence(lesson_id):
+    return render_template(
+        'add_presence.html',
+        current_page='presence',
+        lesson_id=lesson_id
+    )
+
 if __name__ == '__main__':
     app.run(debug=debug)
