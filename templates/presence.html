@@ -11,9 +11,9 @@
         $(document).ready(function() {
             $('#calendar').fullCalendar({
                 header: {
-                    left: 'prev,next',
+                    left: 'prevYear,prev,today,next,nextYear',
                     center: 'title',
-                    right: 'today'
+                    right: ''
                 },
                 lang: 'fr',
                 eventColor: '#cccccc',
@@ -23,10 +23,12 @@
                         id: 1,
                         title: "Test",
                         start: '2015-08-15',
-                        allDay: true
+                        allDay: true,
+                        url: "/add_presence/1"
                     }
                 ]
-            })
+            });
+            $('.fc-toolbar .fc-right').prepend('<a href="/add_lesson" class="fc-button fc-state-default btn" role="button">Ajouter un cours</a>');
         });
     </script>
 
