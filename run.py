@@ -47,6 +47,9 @@ app.add_url_rule(
     view_func=lesson.add_presence,
     methods=['GET', 'POST']
 )
+app.add_url_rule(
+    '/list_lessons', view_func=lesson.list_lessons, methods=['GET']
+)
 
 
 if __name__ == '__main__':

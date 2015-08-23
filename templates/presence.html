@@ -18,14 +18,8 @@
                 lang: 'fr',
                 eventColor: '#cccccc',
                 eventTextColor: '#333333',
-                events: [
-                    {
-                        id: 1,
-                        title: "Test",
-                        start: '2015-08-15',
-                        allDay: true,
-                        url: "/add_presence/1"
-                    }
+                eventSources: [
+                    'list_lessons',
                 ]
             });
             $('.fc-toolbar .fc-right').prepend('<a href="/add_lesson" class="fc-button fc-state-default btn" role="button">Ajouter un cours</a>');
