@@ -1,7 +1,107 @@
 {% extends "logged.html" %}
 
+{% block spec_heads_js %}
+
+<script type="text/javascript">
+
+    function toggle_details(value) {
+        $('#recurring_lesson').toggle();
+        $('#one_time_lesson').toggle();
+    }
+
+</script>
+
+{% endblock %}
+
 {% block page %}
 
-    Ajouter un cours.
+<form action="/add_lesson" method="POST" id="add_lesson_form" >
+    <div class="col-md-10">
+        <h2>Ajouter un cours</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="lesson_title">Nom du cours</label>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control" type="text" name="lesson_title" id="lesson_title" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label class="radio inline" for="frequency">C'est un cours</label>
+            </div>
+            <div class="col-md-5">
+                <div class="radio">
+                    <label class="radio-inline"><input onchange="toggle_details(this.value)" name="frequency" id="frequency" type="radio" value="1" checked="true" />Récurrent</label>
+                    <label class="radio-inline"><input onchange="toggle_details(this.value)" name="frequency" id="frequency" type="radio" value="0" />Ponctuel</label>
+                </div>
+            </div>
+        </div>
+        <div id="recurring_lesson">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="week_day">Jour de la semaine</label>
+                </div>
+                <div class="col-md-5">
+                    <select class="form-control" name="week_day" id="week_day">
+                        <option value="1">Lundi</option>
+                        <option value="2">Mardi</option>
+                        <option value="3">Mercredi</option>
+                        <option value="4">Jeudi</option>
+                        <option value="5">Vendredi</option>
+                        <option value="6">Samedi</option>
+                        <option value="7">Dimanche</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="from">Du</label>
+                </div>
+                <div class="col-md-5">
+                    <input class="form-control" type="date" name="from" id="from" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="to">Au</label>
+                </div>
+                <div class="col-md-5">
+                    <input class="form-control" type="date" name="to" id="to" />
+                </div>
+            </div>
+        </div>
+        <div id="one_time_lesson" hidden="true">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="lesson_date">Date du cours</label>
+                </div>
+                <div class="col-md-5">
+                    <input class="form-control" type="date" name="lesson_date" id="lesson_date" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="start_time">Heure de début</label>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control" type="time" name="start_time" id="start_time" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="end_time">Heure de fin</label>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control" type="time" name="end_time" id="end_time" />
+            </div>
+        </div>
+    </div>
+    <!-- validation -->
+    <div class="col-md-10">
+        <input type="submit" value="Valider" />
+    </div>
+</form>
 
 {% endblock %}

@@ -4,6 +4,7 @@ import datetime
 from flask import (
     render_template,
     request,
+    redirect,
 )
 from flask.views import View
 
@@ -46,10 +47,12 @@ class Lesson(View):
         return json.dumps(lesson_list)
 
     def add_one(self):
-        return render_template(
-            'add_lesson.html',
-            current_page='presence'
-        )
+        if request.method == 'GET':
+            return render_template(
+                'add_lesson.html',
+                current_page='presence'
+            )
+        return redirect('/presence')
 
     def add_presence(self, lesson_id):
         return render_template(
