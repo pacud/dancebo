@@ -4,6 +4,7 @@ from flask import (
     request,
 )
 from flask.views import View
+from slugify import slugify
 
 
 tmp_profile_pic = 'http://img15.hostingpics.net/pics/811484defaultavatar.png'
@@ -100,9 +101,12 @@ class Student(View):
         search_terms = request.form
         user_list = USER_LIST
         matches = []
+        search_last = slugify(search_terms['lastname'])
+        search_first = slugify(search_terms['firstname'])
         for user in user_list:
-            if search_terms['lastname'] == user['lastname']\
-                    and search_terms['firstname'] == user['firstname']:
+            user_last = slugify(user['lastname'])
+            user_first = slugify(user['firstname'])
+            if search_last == user_last and search_first == user_first:
                 matches.append(user)
         return render_template(
             'cartes.html',
