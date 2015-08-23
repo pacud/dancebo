@@ -40,12 +40,12 @@ app.add_url_rule(
 lesson = Lesson()
 app.add_url_rule('/presence', view_func=lesson.get_presence, methods=['GET'])
 app.add_url_rule(
-    '/add_lesson', view_func=lesson.add_one, methods=['GET, POST']
+    '/add_lesson', view_func=lesson.add_one, methods=['GET', 'POST']
 )
 app.add_url_rule(
     '/add_presence/<int:lesson_id>',
     view_func=lesson.add_presence,
-    methods=['GET, POST']
+    methods=['GET', 'POST']
 )
 
 
