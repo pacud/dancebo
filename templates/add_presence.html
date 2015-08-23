@@ -1,7 +1,82 @@
 {% extends "logged.html" %}
 
+{% block spec_heads_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student.css') }}" type="text/css" media="screen, print" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/presence.css') }}" type="text/css" media="screen, print" />
+{% endblock %}
+
+{% block spec_heads_js %}
+<script type="text/javascript">
+
+function remove_presence(student_id, lesson_id) {
+    var removing = $.ajax({
+        url: '/remove_presence',
+        method: "post",
+        data: JSON.stringify({'student_id': student_id, 'lesson_id': lesson_id}),
+        success: function(data) {
+            if (data['status'] == 'ok') {
+                $('#participant_'+student_id).hide();
+                $('#option_'+student_id).prop('disabled', false);
+            }
+        },
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    });
+}
+
+</script>
+{% endblock %}
+
 {% block page %}
 
-    Ajouter des présences au cours {{lesson_id}}.
+{% if not students %}
+    <span>Aucun étudiant trouvé.</span>
+{% endif %}
+
+<div class="col-md-3">
+    <h3>Participants</h3>
+{% for student in students %}
+    <div class="col-md-10 student">
+        <div class="row" id="participant_{{student.id}}" {% if student.participated %} hidden="true" {% endif %}>
+            <a href="/carte_detail/{{student.id}}" title="{{student.firstname}} {{student.lastname}}" target="_blank">
+                <span>
+                    <img src="{{ url_for('static', filename='images/arrow.png') }}" height="15" width="15" style="margin-right: 5px;" />
+                    {{student.firstname}}&nbsp;{{student.lastname}}
+                </span>
+            </a>
+            <div class="btn-group btn-group-xs pull-right" role="group">
+                <button type="button" class="btn btn-default" onclick="remove_presence({{ student.id }}, {{ lesson_id }})">
+                    <img src="{{ url_for('static', filename='images/trash.png') }}" height="15" width="15" />
+                </button>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+<div class="col-md-7">
+    <h3>Ajouter des participants</h3>
+    <form action="/add_presence" method="POST" id="add_presence_form" >
+        <div class="row">
+            <div class="col-md-3">
+                <label for="new_participants">Nouveaux participants</label>
+            </div>
+            <div class="col-md-7">
+                <select multiple="true" class="presence_select">
+                    {% for student in students %}
+                        <option value="{{ student.id }}" id="option_{{student.id}}" {% if not student.participated %} disabled="true" {% endif %} >
+                            {{student.firstname}}&nbsp;{{student.lastname}}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <!-- validation -->
+        <div class="col-md-10">
+            <input type="submit" value="Ajouter" />
+        </div>
+    </form>
+</div>
+
 
 {% endblock %}

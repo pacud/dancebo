@@ -5,8 +5,12 @@ from flask import (
     render_template,
     request,
     redirect,
+    Response,
+    current_app,
 )
 from flask.views import View
+from validators import removal_validator
+from cerberus import ValidationError
 
 LESSON_LIST = [
     {
@@ -46,7 +50,12 @@ class Lesson(View):
             lesson_ready['start'] = str(lesson_ready['start'])
             lesson_ready['end'] = str(lesson_ready['end'])
             lesson_list.append(lesson_ready)
-        return json.dumps(lesson_list)
+        response = Response(
+            json.dumps(lesson_list),
+            status=200,
+            mimetype='application/json'
+        )
+        return response
 
     def add_one(self):
         if request.method == 'GET':
@@ -81,8 +90,34 @@ class Lesson(View):
         )
 
     def add_presence(self, lesson_id):
+        from student import USER_LIST
+        student_list = USER_LIST
+        i = 0
+        for student in student_list:
+            student['participated'] = True if i % 2 == 1 else False
+            i += 1
         return render_template(
             'add_presence.html',
             current_page='presence',
-            lesson_id=lesson_id
+            lesson_id=lesson_id,
+            students=student_list
         )
+
+    def remove_presence(self):
+        data = request.get_json(force=True)
+        try:
+            removal_validator.validate(data)
+        except ValidationError as e:
+            response = Response(
+                json.dumps({'status': e.message}),
+                status=400,
+                mimetype='application/json'
+            )
+            return response
+        # TODO: handle the actual remove
+        response = Response(
+            json.dumps({'status': 'ok'}),
+            status=200,
+            mimetype='application/json'
+        )
+        return response

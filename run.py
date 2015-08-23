@@ -56,6 +56,9 @@ app.add_url_rule(
     methods=['GET', 'POST']
 )
 app.add_url_rule(
+    '/remove_presence', view_func=lesson.remove_presence, methods=['POST']
+)
+app.add_url_rule(
     '/list_lessons', view_func=lesson.list_lessons, methods=['GET']
 )
 
