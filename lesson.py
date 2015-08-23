@@ -11,11 +11,19 @@ LESSON_LIST = [
     {
         'id': 1,
         'title': u"Cours débutant",
-        'start': datetime.datetime(year=2015, month=8, day=15, hour=19, minute=30),
-        'end': datetime.datetime(year=2015, month=8, day=15, hour=21),
+        'start': datetime.datetime(year=2015, month=8, day=13, hour=19, minute=30),
+        'end': datetime.datetime(year=2015, month=8, day=13, hour=21, minute=0),
         'allDay': False,
         'url': u"/add_presence/1"
-    }
+    },
+    {
+        'id': 2,
+        'title': u"Cours intermédiaire",
+        'start': datetime.datetime(year=2015, month=8, day=13, hour=21, minute=0),
+        'end': datetime.datetime(year=2015, month=8, day=13, hour=22, minute=30),
+        'allDay': False,
+        'url': u"/add_presence/2"
+    },
 ]
 
 
