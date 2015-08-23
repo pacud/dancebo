@@ -17,7 +17,7 @@
 
 <form action="/add_lesson" method="POST" id="add_lesson_form" >
     <div class="col-md-10">
-        <h2>Ajouter un cours</h2>
+        <h2>{% if lesson %}Modifier{% else %}Ajouter{% endif %} un cours</h2>
         <div class="row">
             <div class="col-md-3">
                 <label for="lesson_title">Nom du cours</label>
@@ -98,6 +98,9 @@
             </div>
         </div>
     </div>
+    {% if lesson %}
+    <input type="hidden" value="{{lesson.id}}" id="lesson_id" />
+    {% endif %}
     <!-- validation -->
     <div class="col-md-10">
         <input type="submit" value="Valider" />

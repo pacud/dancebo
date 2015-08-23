@@ -15,7 +15,8 @@ LESSON_LIST = [
         'start': datetime.datetime(year=2015, month=8, day=13, hour=19, minute=30),
         'end': datetime.datetime(year=2015, month=8, day=13, hour=21, minute=0),
         'allDay': False,
-        'url': u"/add_presence/1"
+        'url': u"/add_presence/1",
+        'recurring': 1,
     },
     {
         'id': 2,
@@ -23,7 +24,8 @@ LESSON_LIST = [
         'start': datetime.datetime(year=2015, month=8, day=13, hour=21, minute=0),
         'end': datetime.datetime(year=2015, month=8, day=13, hour=22, minute=30),
         'allDay': False,
-        'url': u"/add_presence/2"
+        'url': u"/add_presence/2",
+        'recurring': 2,
     },
 ]
 
@@ -49,10 +51,34 @@ class Lesson(View):
     def add_one(self):
         if request.method == 'GET':
             return render_template(
-                'add_lesson.html',
+                'edit_lesson.html',
                 current_page='presence'
             )
         return redirect('/presence')
+
+    def chose(self):
+        if request.method == 'GET':
+            return render_template(
+                'chose_lesson.html',
+                current_page="presence",
+                lesson_list=LESSON_LIST
+            )
+        # TODO: extraire l'id du cours du résultat du formulaire
+        lesson_id = 1
+        return redirect('/edit_lesson/{}'.format(lesson_id))
+
+    def edit(self, lesson_id):
+        lesson_list = LESSON_LIST
+        lesson = None
+        for lesson in lesson_list:
+            if lesson['id'] == lesson_id:
+                break
+        # TODO: Gérer le cas où le cours n'est pas trouvé
+        return render_template(
+            'edit_lesson.html',
+            current_page='presence',
+            lesson=lesson
+        )
 
     def add_presence(self, lesson_id):
         return render_template(

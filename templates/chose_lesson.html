@@ -1,0 +1,15 @@
+{% extends "logged.html" %}
+{% block page %}
+
+<form action="/chose_lesson" method="POST" id="chose_lesson_form" >
+    <div class="col-md-10">
+        <h2>Choisir un cours à modifier</h2>
+        <!-- TODO: Faire le formulaire pour choisir le cours à éditer (récurrent ou pas etc) -->
+     </div>
+    <!-- validation -->
+    <div class="col-md-10">
+        <input type="submit" value="Valider" />
+    </div>
+</form>
+
+{% endblock %}
