@@ -14,7 +14,7 @@ class Misc(View):
     def show_home(self):
         return render_template('home.html', current_page="home")
 
-    def login():
+    def login(self):
         if session.get('name'):
             return redirect('/home')
         if request.method == 'POST':
