@@ -56,7 +56,7 @@ function remove_presence(student_id, lesson_id) {
 
 <div class="col-md-7">
     <h3>Ajouter des participants</h3>
-    <form action="/add_presence" method="POST" id="add_presence_form" >
+    <form action="/add_presence/{{lesson_id}}" method="POST" id="add_presence_form" >
         <div class="row">
             <div class="col-md-3">
                 <label for="new_participants">Nouveaux participants</label>
