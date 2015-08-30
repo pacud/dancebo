@@ -36,7 +36,7 @@ USER_LIST = [
     },
     {
         'id': 4,
-        'firstname': u'Hairy',
+        'firstname': u'Bene',
         'lastname': u'Nut',
         'mobile': u'0712345689',
         'cart_paid': 0,
