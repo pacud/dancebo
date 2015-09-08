@@ -7,12 +7,20 @@ from flask import (
 )
 from flask.views import View
 from werkzeug.exceptions import Forbidden
+from models.user import UserModel
 
 
 class Misc(View):
 
     def show_home(self):
-        return render_template('home.html', current_page="home")
+        home_data = UserModel().generic_stats()
+        invoices_to_generate = UserModel().invoices_to_edit()
+        return render_template(
+            'home.html',
+            current_page="home",
+            stats=home_data,
+            invoices=invoices_to_generate
+        )
 
     def login(self):
         if session.get('name'):

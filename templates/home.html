@@ -1,6 +1,52 @@
 {% extends "logged.html" %}
 {% block page %}
 
-that's my home page
+{% block spec_heads_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/generic.css') }}" type="text/css" media="screen, print" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/invoice.css') }}" type="text/css" media="screen, print" />
+{% endblock %}
+
+<h4>Statistiques générales</h4>
+<ul>
+    <li>
+        Nombre d'élèves inscrits :
+        <strong>
+            <span style="color:blue;">{{ stats.total }}</span>
+        </strong>
+    </li>
+    <li>
+        Nombre d'élèves dont la carte finit bientôt (date) :
+        <strong>
+            <span style="color:red;">{{ stats.nb_date_expiration }}</span>
+        </strong>
+    </li>
+    <li>
+        Nombre d'élèves dont la carte finit bientôt (nb cours) :
+        <strong>
+            <span style="color:orange;">{{ stats.nb_lesson_expiration }}</span>
+        </strong>
+    </li>
+</ul>
+
+<br />
+
+<h4>Elèves dont la facture est à générer</h4>
+
+{% if invoices %}
+<ul class="home_invoices_list">
+    {% for invoice in invoices %}
+    <li>
+        <a href="/edit_invoice/{{ invoice.user_id }}/{{ invoice.lesson_id }}">
+            <img src="{{ url_for('static', filename='images/double_square_blue.png') }}" height="15" width="15" style="margin-right: 5px;" />
+            Editer la facture de "{{ invoice.user_name }}" pour le cours "{{ invoice.lesson_name }}"
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<ul>
+    <li>Toutes les factures ont été générées.</li>
+</ul>
+{% endif %}
 
 {% endblock %}

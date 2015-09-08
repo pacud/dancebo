@@ -6,6 +6,7 @@ from flask import Flask
 from student import Student
 from misc import Misc
 from lesson import Lesson
+from invoice import Invoice
 
 
 # init config
@@ -60,6 +61,14 @@ app.add_url_rule(
 )
 app.add_url_rule(
     '/list_lessons', view_func=lesson.list_lessons, methods=['GET']
+)
+# invoices related endpoints
+invoice = Invoice()
+app.add_url_rule('/invoice', view_func=invoice.list_invoices, methods=['GET'])
+app.add_url_rule(
+    '/edit_invoice/<int:student_id>/<int:lesson_id>',
+    view_func=invoice.edit_invoice,
+    methods=['GET', 'POST']
 )
 
 

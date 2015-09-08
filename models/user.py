@@ -1,4 +1,5 @@
 # coding: utf8
+import datetime
 from slugify import slugify
 
 
@@ -43,6 +44,10 @@ USER_LIST = [
         'lessons_left': 0,
         'profile_pic': tmp_profile_pic,
         'medical_certificate': 1,
+        'lessons': [
+            {'id': 1, 'title': u"Cours débutant", 'start': datetime.datetime(year=2015, month=8, day=13, hour=19, minute=30), 'done': False},
+            {'id': 2, 'title': u"Cours intermédiaire", 'start': datetime.datetime(year=2015, month=8, day=13, hour=21, minute=0), 'done': True},
+        ],
     },
 ]
 
@@ -97,3 +102,26 @@ class UserModel(object):
             'favorite_chanel': favorite_chanel,
             'lessons_left': 0,
         }
+
+    def generic_stats(self):
+        user_list = self.list()
+        stats = {
+            'total': len(user_list),
+            'nb_date_expiration': 0,
+            'nb_lesson_expiration': 0,
+        }
+        return stats
+
+    def invoices_to_edit(self):
+        user_list = self.list()
+        invoice_list = []
+        for user in user_list:
+            for lesson in user.get('lessons', []):
+                if not lesson.get('done'):
+                    invoice_list.append({
+                        'user_id': user.get('id'),
+                        'lesson_id': lesson.get('id'),
+                        'lesson_name': u'{} {}'.format(lesson.get('title'), lesson.get('start')),
+                        'user_name': u'{} {}'.format(user.get('firstname'), user.get('lastname')),
+                    })
+        return invoice_list
