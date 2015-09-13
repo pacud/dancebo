@@ -77,6 +77,10 @@
     };
 
     function remove_amount(row_id) {
+        if ($('.amount_row').length == 1) {
+            alert("Impossible de supprimer le dernier champs montant.");
+            return;
+        }
         $('#'+row_id).remove();
     };
 
