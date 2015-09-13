@@ -27,6 +27,12 @@
             }
         })
         $('#favorite_chanel').val(favorite_chanel.join(','));
+        // Concatenate amounds in one field
+        var amounts = [];
+        $('.amount_visible').each(function(item){
+            amounts.push(this.value);
+        })
+        $('#amount').val(amounts.join(','));
         // TODO: Enrichir conf_text avec les infos du form
         var conf_text = 'Enregistrer l\'élève ?';
         var conf = confirm(conf_text);
@@ -59,6 +65,54 @@
         var card_hint = 'La carte coûte ' + amount + ' €.'
         $('#card_price').text(card_hint);
         $('#card_price').show();
+    };
+
+    function toggle_amount_buttons(value) {
+        if ($.inArray(parseInt(value), [3, 4]) >= 0) {
+            $('.amount_button').prop('disabled', false);
+        }
+        else {
+            $('.amount_button').prop('disabled', true);
+        }
+    };
+
+    function remove_amount(row_id) {
+        $('#'+row_id).remove();
+    };
+
+    var global_amount_id = 1;
+
+    function add_amount(elem) {
+        if ($('.amount_row').length >= 3) {
+            alert("Impossible de payer en plus de 3 fois.");
+            return;
+        }
+        global_amount_id = global_amount_id + 1;
+        var id = global_amount_id.toString();
+        var more_url = "{{ url_for('static', filename='images/more.png') }}";
+        var less_url = "{{ url_for('static', filename='images/trash.png') }}";
+        var amount_div = "\
+            <div class='amount_row' id='amount_row_"+ id +"'>\
+                <div class='col-md-5'>\
+                </div>\
+                <div class='row'>\
+                    <div class='col-md-4'>\
+                        <input type='text' class='form-control amount_visible' name='amount_val' />\
+                    </div>\
+                    <div class='col-md-1'>\
+                        <button type='button' class='btn btn-default amount_button' onclick='add_amount()'>\
+                            <img src='"+ more_url +"' height='20' width='20' />\
+                        </button>\
+                    </div>\
+                    <div class='col-md-1'>\
+                        <button type='button' class='btn btn-default amount_button' onclick=\"remove_amount('amount_row_"+ id +"')\">\
+                            <img src='"+ less_url +"' height='20' width='20' />\
+                        </button>\
+                    </div>\
+                </div>\
+            </div>\
+        ";
+        $('#amount_container').append(amount_div);
     };
 
 </script>
@@ -153,7 +207,7 @@
                 <label for="paiment_method">Méthode de paiement</label>
             </div>
             <div class="col-md-6">
-                <select name="paiment_method" id="paiment_method" >
+                <select name="paiment_method" id="paiment_method" onchange="toggle_amount_buttons(this.value)">
                     <option value="0"></option>
                     <option value="1">Espèces (total)</option>
                     <option value="4">Espèces (plusieurs fois)</option>
@@ -163,13 +217,30 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
-                <label for="amount">Montant: </label>
-            </div>
-            <div class="col-md-6">
-                <input type="text" class="form-control" name="amount" id="amount" />
+            <div id="amount_container">
+                <div class="amount_row" id="amount_row_1">
+                    <div class="col-md-5">
+                        <label for="amount">Montant: </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control amount_visible" name="amount_val" />
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-default amount_button" onclick="add_amount()" disabled="true">
+                                <img src="{{ url_for('static', filename='images/more.png') }}" height="20" width="20" />
+                            </button>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-default amount_button" onclick="remove_amount('amount_row_1')" disabled="true">
+                                <img src="{{ url_for('static', filename='images/trash.png') }}" height="20" width="20" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <input type="hidden" name="amount" id="amount" />
         <div class="row">
             <div class="col-md-5">
                 <label class="radio inline" for="medical_certificate">Certificat médical</label>

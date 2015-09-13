@@ -26,6 +26,7 @@ class Student(View):
 
     def add_student(self):
         data = request.form
+        amounts = [int(amount) for amount in data.get('amount').split(',')]
         profile = UserModel().add(
             title=data.get('title'),
             firstname=data.get('firstname'),
@@ -38,7 +39,7 @@ class Student(View):
             paiment_method=data.get('paiment_method'),
             medical_certificate=data.get('medical_certificate', 0),
             inscription_paid=data.get('inscription_paid', 0),
-            amount=data.get('amount', 0),
+            amount=amounts,
             origin=data.get('origin', '').split(','),
             origin_other_social=data.get('origin_other_social'),
             origin_hearsay=data.get('origin_hearsay'),
